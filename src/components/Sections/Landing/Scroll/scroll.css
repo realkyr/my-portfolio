@@ -1,0 +1,93 @@
+.scroll-overlay {
+    font-family: 'Montserrat', sans-serif;
+    font-size:9px;
+    text-transform:uppercase;
+}
+
+.mouse-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mouse {
+    width:18px;
+    height:30px;
+    border:1px solid #ffffff;
+    border-radius:9px;
+    position:relative;
+    margin:30px auto;
+}
+
+.mouse:after {
+    content:"";
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:2px;
+    background: #ededed;
+    display:block;
+    left:50%;
+    transform:translateX(-50%);
+    top:5px;
+    animation: control 1.5s infinite;
+}
+
+@keyframes control {
+    0% {
+        opacity:1;
+        top:5px;
+    }
+    60% {
+        opacity:1;
+    }
+    90%{
+        top:20px;
+    }
+    100%{
+        opacity:0
+    }
+}
+
+.scrollBox {
+    position:fixed;
+    width:4px;
+    height:50px;
+    /*   border:1px solid #FA003c; */
+    overflow:hidden;
+    bottom:50px;
+    left:50px;
+}
+.scrollBox:after {
+    content:"";
+    position:absolute;
+    top:-50px;
+    height:50px;
+    width:4px;
+    background: crimson;
+    animation:scrollDrive 2s ease infinite;
+}
+
+@keyframes scrollDrive {
+    0% {
+        top:-50px;
+    }
+    50% {
+        top:50px;
+    }
+    100% {
+        top:50px;
+    }
+}
+
+.vertical-text {
+    margin: 0 auto 2em;
+    width: 0;
+    word-wrap: break-word;
+    position:fixed;
+    left:46px;
+    bottom:90px;
+    font-size:9px;
+    text-transform:uppercase;
+}
