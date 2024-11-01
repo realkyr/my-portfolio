@@ -3,9 +3,9 @@ import {
   ScrollingProvider,
   useScrollSection,
   Section,
-} from 'react-scroll-section';
+} from '../SectionScroll';
 
-import { Landing } from '@/components/Sections';
+import { Landing, About } from '@/components/Sections';
 
 const StaticMenu = () => {
   const homeSection = useScrollSection('home');
@@ -28,6 +28,7 @@ export default function Home() {
     <ScrollingProvider>
       <StaticMenu />
       <Section id="home"><Landing /></Section>
+      <Section id="about"><About /></Section>
     </ScrollingProvider>
   );
 }
