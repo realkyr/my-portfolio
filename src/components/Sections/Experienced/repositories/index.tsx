@@ -1,5 +1,11 @@
-import {collection, getDocs, getFirestore, orderBy, query} from "@firebase/firestore";
-import {getFirebaseApp} from "@/lib/firebase";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  orderBy,
+  query,
+} from '@firebase/firestore'
+import { getFirebaseApp } from '@/lib/firebase'
 
 export const getExperienceRepo = async () => {
   const app = getFirebaseApp()

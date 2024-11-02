@@ -3,14 +3,14 @@ import 'firebase/analytics'
 import { getAnalytics } from '@firebase/analytics'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBulSl662TPk6JZOeQc_sKl2cOcnzVkLeQ",
-  authDomain: "yora-resume.firebaseapp.com",
-  projectId: "yora-resume",
-  storageBucket: "yora-resume.appspot.com",
-  messagingSenderId: "463287187696",
-  appId: "1:463287187696:web:9648266ee73ff94c9faa35",
-  measurementId: "G-9EXPEBJG0Y"
-};
+  apiKey: 'AIzaSyBulSl662TPk6JZOeQc_sKl2cOcnzVkLeQ',
+  authDomain: 'yora-resume.firebaseapp.com',
+  projectId: 'yora-resume',
+  storageBucket: 'yora-resume.appspot.com',
+  messagingSenderId: '463287187696',
+  appId: '1:463287187696:web:9648266ee73ff94c9faa35',
+  measurementId: 'G-9EXPEBJG0Y',
+}
 
 export const getFirebaseApp = () => {
   try {
@@ -28,4 +28,3 @@ export const getFirebaseApp = () => {
     }
   }
 }
-

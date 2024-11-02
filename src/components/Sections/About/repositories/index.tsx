@@ -1,5 +1,5 @@
-import {doc, getDoc, getFirestore} from "@firebase/firestore";
-import {getFirebaseApp} from "@/lib/firebase";
+import { doc, getDoc, getFirestore } from '@firebase/firestore'
+import { getFirebaseApp } from '@/lib/firebase'
 
 export const getProfileRepo = async () => {
   const app = getFirebaseApp()

@@ -1,9 +1,7 @@
-import localFont from "next/font/local";
+import localFont from 'next/font/local'
 
 const theSecrets = localFont({
-  src: "./the-secrets/TheSecret-Regular.otf",
-});
+  src: './the-secrets/TheSecret-Regular.otf',
+})
 
-export {
-  theSecrets,
-}
+export { theSecrets }

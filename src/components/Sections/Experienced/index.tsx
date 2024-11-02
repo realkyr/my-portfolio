@@ -1,27 +1,29 @@
 'use client'
-import React, {useEffect} from 'react';
-import {theSecrets} from "@/app/fonts";
-import {getExperienceService} from "@/components/Sections/Experienced/services";
-import Timeline from "@/components/Sections/Experienced/components/Timeline";
+import React, { useEffect } from 'react'
+import { theSecrets } from '@/app/fonts'
+import { getExperienceService } from '@/components/Sections/Experienced/services'
+import Timeline from '@/components/Sections/Experienced/components/Timeline'
 
 const Experienced = () => {
-
-  const [experiences, setExperiences] = React.useState<any>(null);
+  const [experiences, setExperiences] = React.useState<any>(null)
 
   useEffect(() => {
-    getExperienceService().then(experiences => {
-      setExperiences(experiences);
-    });
-  }, []);
+    getExperienceService().then((experiences) => {
+      setExperiences(experiences)
+    })
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col items-center">
-      <h1 className={`text-[3rem] md:text-[5rem] mt-16 text-center font-medium ${theSecrets.className}`}>Working Experience</h1>
-
+      <h1
+        className={`text-[3rem] md:text-[5rem] mt-16 text-center font-medium ${theSecrets.className}`}
+      >
+        Working Experience
+      </h1>
 
       <Timeline items={experiences || []} loading={experiences === null} />
     </div>
   )
-};
+}
 
-export default Experienced;
+export default Experienced
