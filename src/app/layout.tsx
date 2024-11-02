@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {Metadata, Viewport} from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   description: "Welcome! I'm Phuree Kanusont, a software engineer.",
 };
 
+export const viewport: Viewport = {
+  themeColor: 'dark',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dark text-snow`}
       >
         {children}
       </body>

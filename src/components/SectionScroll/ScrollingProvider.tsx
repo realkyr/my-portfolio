@@ -1,8 +1,10 @@
-import React, {createContext, RefObject, useCallback, useContext, useRef} from 'react';
+import React, {createContext, RefObject, useCallback, useContext, useRef, useState} from 'react';
 
 interface ScrollingContextType {
   registerSection: (id: string, ref: RefObject<HTMLElement>) => void;
   scrollToSection: (id: string) => void;
+  activeSection: string | null;
+  setActiveSection: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const DEFAULT_CONTEXT = {
@@ -10,6 +12,9 @@ const DEFAULT_CONTEXT = {
   },
   scrollToSection: () => {
   },
+  activeSection: null,
+  setActiveSection: () => {
+  }
 }
 
 const ScrollingContext = createContext<ScrollingContextType>(DEFAULT_CONTEXT);
@@ -20,6 +25,7 @@ export const ScrollingProvider = ({children}: {
   children: React.ReactNode
 }) => {
   const sections = useRef<Record<string, HTMLElement>>({});
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const registerSection = (id: string, ref: RefObject<HTMLElement>) => {
     if (!ref.current) {
@@ -37,7 +43,7 @@ export const ScrollingProvider = ({children}: {
   };
 
   return (
-    <ScrollingContext.Provider value={{registerSection, scrollToSection}}>
+    <ScrollingContext.Provider value={{registerSection, scrollToSection, activeSection, setActiveSection}}>
       {children}
     </ScrollingContext.Provider>
   );
