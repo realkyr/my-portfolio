@@ -92,7 +92,7 @@ const Portfolio = () => {
                     </div>
                     {portfolio.tags &&
                       portfolio.tags.map((t, index) => (
-                        <Badge key={index} className="mr-2 bg-stone-500">
+                        <Badge key={index} className="mr-2 bg-stone-950!">
                           <Show when={!!t.image}>
                             <Show.Then>
                               <NextImage
