@@ -3,6 +3,7 @@ import React, {
   RefObject,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -48,6 +49,27 @@ export const ScrollingProvider = ({
     }
   }
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    Object.values(sections.current).forEach((section) => {
+      observer.observe(section)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <ScrollingContext.Provider
       value={{
@@ -60,13 +82,4 @@ export const ScrollingProvider = ({
       {children}
     </ScrollingContext.Provider>
   )
-}
-
-// Custom hook to get scroll functionality for a specific section
-export const useScrollSection = (id: string) => {
-  const { scrollToSection } = useScrollingContext()
-
-  return {
-    onClick: useCallback(() => scrollToSection(id), [id, scrollToSection]),
-  }
 }

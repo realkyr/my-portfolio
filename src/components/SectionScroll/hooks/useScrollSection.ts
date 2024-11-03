@@ -1,42 +1,21 @@
-// hooks/useScrollSection.js
-import { useEffect, useRef, useCallback, useState } from 'react'
-import { useScrollingContext } from '../ScrollingProvider'
+import { useCallback, useEffect, useRef } from 'react'
+import { useScrollingContext } from '@/components/SectionScroll/ScrollingProvider'
 
-export const useScrollSection = (id: string) => {
-  const { scrollToSection, setActiveSection, activeSection, registerSection } =
-    useScrollingContext()
-  const sectionRef = useRef(null)
-  const [isActive, setIsActive] = useState(false)
+const useScrollSection = (id: string) => {
+  const { scrollToSection, activeSection } = useScrollingContext()
+  const ref = useRef<HTMLElement>(null)
 
-  // Register the section on mount
   useEffect(() => {
-    registerSection(id, sectionRef)
-  }, [id, registerSection])
-
-  // Intersection observer to detect when section is in view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveSection(id)
-          setIsActive(true)
-        } else {
-          setIsActive(false)
-        }
-      },
-      { threshold: 0.5 } // Adjust threshold as needed
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    if (ref.current) {
+      scrollToSection(id)
     }
-
-    return () => observer.disconnect()
-  }, [id, setActiveSection])
+  }, [id, scrollToSection])
 
   return {
-    ref: sectionRef,
+    ref,
     onClick: useCallback(() => scrollToSection(id), [id, scrollToSection]),
-    isActive: activeSection === id,
+    active: activeSection === id,
   }
 }
+
+export default useScrollSection
