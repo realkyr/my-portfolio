@@ -37,6 +37,11 @@ jobs:
           version: '>= 390.0.0'
           project_id: ${{ env.PROJECT_ID }}
 
+      - name: Set Credentials File
+        run: >-
+          gcloud auth login
+          --cred-file=${{steps.auth.outputs.credentials_file_path}}
+
       - name: Configure Docker for Google Artifact Registry
         run: |
           gcloud auth configure-docker ${REGION}-docker.pkg.dev
