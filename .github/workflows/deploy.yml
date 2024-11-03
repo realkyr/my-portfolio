@@ -31,11 +31,6 @@ jobs:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
 
-      - name: Set Credentials File
-        run: >-
-          gcloud auth login
-          --cred-file=${{steps.auth.outputs.credentials_file_path}}
-
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
