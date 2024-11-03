@@ -8,6 +8,7 @@ import {
   Skills,
   Portfolio,
 } from '@/components/Sections'
+import { Provider } from 'jotai'
 
 const StaticMenu = () => {
   const homeSection = useScrollSection('home')
@@ -27,23 +28,25 @@ const StaticMenu = () => {
 
 export default function Home() {
   return (
-    <ScrollingProvider>
-      <StaticMenu />
-      <Section id="home">
-        <Landing />
-      </Section>
-      <Section id="about">
-        <About />
-      </Section>
-      <Section id="experienced">
-        <Experienced />
-      </Section>
-      <Section id="skills">
-        <Skills />
-      </Section>
-      <Section id="portfolio">
-        <Portfolio />
-      </Section>
-    </ScrollingProvider>
+    <Provider>
+      <ScrollingProvider>
+        <StaticMenu />
+        <Section id="home">
+          <Landing />
+        </Section>
+        <Section id="about">
+          <About />
+        </Section>
+        <Section id="experienced">
+          <Experienced />
+        </Section>
+        <Section id="skills">
+          <Skills />
+        </Section>
+        <Section id="portfolio">
+          <Portfolio />
+        </Section>
+      </ScrollingProvider>
+    </Provider>
   )
 }

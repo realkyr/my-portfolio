@@ -3,13 +3,14 @@ import React from 'react'
 import { theSecrets } from '@/app/fonts'
 import SkillCard from './components/SkillCard'
 import { getSkillsService } from '@/components/Sections/Skills/services'
-import { Category } from '@/types'
 import { Show } from '@/components/ui/Show'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { useAtom } from 'jotai'
+import { skillsAtom } from '@/app/atom/skills'
 
 const Skills = () => {
   const [loading, setLoading] = React.useState(true)
-  const [skillsData, setSkillsData] = React.useState<Category[]>([])
+  const [skillsData, setSkillsData] = useAtom(skillsAtom)
 
   React.useEffect(() => {
     const getSkills = async () => {

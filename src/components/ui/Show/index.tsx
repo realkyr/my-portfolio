@@ -13,11 +13,13 @@ type ShowElseProps = { children: ReactNode }
 
 type ShowProps = {
   when: boolean | undefined | null
-  children: [ReactElement<ShowThenProps>, ReactElement<ShowElseProps>?]
+  children:
+    | ReactElement<ShowThenProps>
+    | [ReactElement<ShowThenProps>, ReactElement<ShowElseProps>?]
 }
 
 export const Show = ({ when, children }: ShowProps) => {
-  const [thenContent, elseContent] = children
+  const [thenContent, elseContent] = React.Children.toArray(children)
 
   return <>{when ? thenContent : elseContent}</>
 }

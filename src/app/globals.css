@@ -26,6 +26,7 @@
   color: white;
   padding: 2px;
   font-size: 90%;
+  z-index: 20;
 }
 
 .custom-overlay__tag {

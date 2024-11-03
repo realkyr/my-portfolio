@@ -1,13 +1,11 @@
+import { Skill } from '@/types/skills'
+
 export interface Link {
   name: string
   url: string
 }
 
-export interface Tags {
-  title: string
-  value: string // this use to display the tag, which is weird
-  key: string
-}
+export type Tags = string
 
 export interface Portfolio {
   image: string
@@ -15,4 +13,8 @@ export interface Portfolio {
   description: string
   tags: Tags[]
   link: Link[]
+}
+
+export interface PortfolioJoinSkill extends Omit<Portfolio, 'tags'> {
+  tags: Skill[]
 }

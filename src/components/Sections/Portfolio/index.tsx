@@ -5,9 +5,15 @@ import { Show } from '@/components/ui/Show'
 import { Gallery } from 'react-grid-gallery'
 import LoadingImage from '@/components/Sections/Portfolio/components/LoadingImage'
 import { getPortfolioService } from '@/components/Sections/Portfolio/services'
-import { Portfolio as IPortfolio } from '@/types/portfolio'
+import { PortfolioJoinSkill } from '@/types/portfolio'
 import { HOSTNAME } from '@/lib/drive'
 import Image from '@/components/Sections/Portfolio/components/Image'
+import NextImage from 'next/image'
+import PortfolioModal from '@/components/Sections/Portfolio/components/PortfolioModal'
+import { useAtom } from 'jotai/index'
+import { skillsMapAtom } from '@/app/atom/skills'
+import { Skill } from '@/types'
+import { Badge } from '@/components/ui/Badge'
 
 const PLACEHOLD_IMAGE = {
   src: '/images/placeholder.png',
@@ -17,19 +23,37 @@ const PLACEHOLD_IMAGE = {
 }
 
 const Portfolio = () => {
+  const [open, setOpen] = React.useState(false)
+  const [focusProject, setFocusProject] = React.useState<PortfolioJoinSkill>(
+    {} as PortfolioJoinSkill
+  )
+
   const [loading, setLoading] = React.useState(true)
-  const [portfolioData, setPortfolioData] = React.useState<IPortfolio[]>([])
+  const [portfolioData, setPortfolioData] = React.useState<
+    PortfolioJoinSkill[]
+  >([])
+
+  const [skillsMap] = useAtom(skillsMapAtom)
 
   React.useEffect(() => {
     const getPortfolio = async () => {
       setLoading(true)
       const portfolios = await getPortfolioService()
-      setPortfolioData(portfolios || [])
+      setPortfolioData(
+        portfolios.map((project) => {
+          return {
+            ...project,
+            tags: project.tags.map((tag) => skillsMap[tag] || { name: tag }),
+          }
+        }) || []
+      )
       setLoading(false)
     }
 
+    if (Object.keys(skillsMap).length === 0) return
+
     getPortfolio().then()
-  }, [])
+  }, [skillsMap])
 
   return (
     <div className="min-h-screen flex flex-col items-center">
@@ -50,11 +74,15 @@ const Portfolio = () => {
 
           <Show.Else>
             <Gallery
+              onClick={(index: number) => {
+                setFocusProject(portfolioData[index])
+                setOpen(true)
+              }}
               images={portfolioData.map((portfolio) => ({
                 src: HOSTNAME + portfolio.image,
                 width: 480,
                 height: 270,
-                tags: portfolio.tags,
+                customTags: portfolio.tags,
                 customOverlay: (
                   <div className="custom-overlay__caption">
                     <div>
@@ -64,9 +92,20 @@ const Portfolio = () => {
                     </div>
                     {portfolio.tags &&
                       portfolio.tags.map((t, index) => (
-                        <div key={index} className="custom-overlay__tag">
-                          {t.value}
-                        </div>
+                        <Badge key={index} className="mr-2 bg-stone-500">
+                          <Show when={!!t.image}>
+                            <Show.Then>
+                              <NextImage
+                                src={HOSTNAME + t.image}
+                                width={15}
+                                height={15}
+                                alt={t.name}
+                              />
+                            </Show.Then>
+
+                            <Show.Else>{t.name}</Show.Else>
+                          </Show>
+                        </Badge>
                       ))}
                   </div>
                 ),
@@ -77,6 +116,12 @@ const Portfolio = () => {
           </Show.Else>
         </Show>
       </div>
+
+      <PortfolioModal
+        open={open}
+        onOpenChange={(isOpen: boolean) => setOpen(isOpen)}
+        project={focusProject}
+      />
     </div>
   )
 }
