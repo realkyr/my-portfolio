@@ -1,7 +1,13 @@
 'use client'
 import { ScrollingProvider, useScrollSection, Section } from '../SectionScroll'
 
-import { Landing, About, Experienced, Skills } from '@/components/Sections'
+import {
+  Landing,
+  About,
+  Experienced,
+  Skills,
+  Portfolio,
+} from '@/components/Sections'
 
 const StaticMenu = () => {
   const homeSection = useScrollSection('home')
@@ -34,6 +40,9 @@ export default function Home() {
       </Section>
       <Section id="skills">
         <Skills />
+      </Section>
+      <Section id="portfolio">
+        <Portfolio />
       </Section>
     </ScrollingProvider>
   )

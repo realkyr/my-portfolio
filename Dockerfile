@@ -1,5 +1,5 @@
 # Step 1: Build the app
-FROM oven/bun:latest AS base
+FROM oven/bun:alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
