@@ -10,7 +10,7 @@ env:
   REGION: ${{ secrets.REGION }}
   REPOSITORY: my-portfolio
   IMAGE_NAME: my-portfolio
-  WORKLOAD_IDENTITY_PROVIDER: /projects/463287187696/locations/global/workloadIdentityPools/github-actions-pool/providers/dataproc-github-idp
+  WORKLOAD_IDENTITY_PROVIDER: projects/463287187696/locations/global/workloadIdentityPools/github-actions-pool/providers/dataproc-github-idp
 
 jobs:
   build-and-deploy:
