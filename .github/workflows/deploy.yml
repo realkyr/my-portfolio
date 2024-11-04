@@ -55,7 +55,7 @@ jobs:
 
       - name: SSH into VM and pull the new image
         run: |
-          gcloud compute ssh app --command "
+          gcloud compute ssh app --zone ${REGION}-a --command "
             docker pull ${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:latest;
             docker stop my-portfolio;
             docker rm my-portfolio;
