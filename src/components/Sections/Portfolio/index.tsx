@@ -83,32 +83,6 @@ const Portfolio = () => {
                 width: 480,
                 height: 270,
                 customTags: portfolio.tags,
-                customOverlay: (
-                  <div className="custom-overlay__caption">
-                    <div>
-                      {portfolio.description.length > 100
-                        ? portfolio.description.slice(0, 100) + '...'
-                        : portfolio.description}
-                    </div>
-                    {portfolio.tags &&
-                      portfolio.tags.map((t, index) => (
-                        <Badge key={index} className="mr-2 bg-stone-950!">
-                          <Show when={!!t.image}>
-                            <Show.Then>
-                              <NextImage
-                                src={HOSTNAME + t.image}
-                                width={15}
-                                height={15}
-                                alt={t.name}
-                              />
-                            </Show.Then>
-
-                            <Show.Else>{t.name}</Show.Else>
-                          </Show>
-                        </Badge>
-                      ))}
-                  </div>
-                ),
               }))}
               enableImageSelection={false}
               thumbnailImageComponent={Image}
