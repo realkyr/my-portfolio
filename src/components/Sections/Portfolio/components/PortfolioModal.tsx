@@ -11,6 +11,7 @@ import { HOSTNAME } from '@/lib/drive'
 import { useAtom } from 'jotai'
 import { skillsMapAtom } from '@/app/atom/skills'
 import { Show } from '@/components/ui/Show'
+import { Button } from '@/components/ui/Button'
 
 interface PortfolioModalProps {
   open: boolean
@@ -32,7 +33,7 @@ export default function PortfolioModal({
           {/*  A brief overview of my latest project.*/}
           {/*</DialogDescription>*/}
         </DialogHeader>
-        <div className="mt-4 space-y-4">
+        <div className="mt-4 space-y-4 max-h-[70vh] overflow-y-auto">
           <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
             <Image
               width={480}
@@ -89,6 +90,17 @@ export default function PortfolioModal({
               ))}
             </div>
           </div>
+        </div>
+
+        {/*  Footer CLose*/}
+
+        <div className="flex justify-end mt-4">
+          <Button
+            className="bg-stone-700 text-snow hover:bg-stone-900"
+            onClick={() => onOpenChange(false)}
+          >
+            Close
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
