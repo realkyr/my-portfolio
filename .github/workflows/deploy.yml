@@ -43,7 +43,7 @@ jobs:
 
       - name: Write .env file
         run: |
-          echo ${{ secrets.ENV_FILE }} > .env
+          echo ${{ secrets.ENV }} > .env
 
       - name: Build Docker image
         run: |
